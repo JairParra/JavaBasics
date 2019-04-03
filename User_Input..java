@@ -1,4 +1,6 @@
-import java.util.Scanner; 
+
+=import java.util.Scanner; 
+
 /**
  * The following program is a demo of how to obtain user input with Scanner. 
  * @author Hair Albeiro Parra Barrera
@@ -12,6 +14,8 @@ public class User_Input {
 		System.out.println("Welcome to the adding program! Please input three integers");
 		int result = addthree();
 		System.out.println(result);
+		
+		add_n_numbers(10); // add 10 numbers
 
 	}
 	
@@ -42,6 +46,27 @@ public class User_Input {
 		int result = x + y + z;
 		return result; 
 	}
+	
+	/**
+	 * Recursively asks for n numbers 
+	 * @param n
+	 */
+	public static void add_n_numbers(double n) { 
+		
+		double result = 0; 
+		double temp = 0; // to temporary store input 
+		
+		for (int i =0; i < n ; i++) { 
+			System.out.println("Please input integer #" + i); 
+			Scanner get = new Scanner(System.in); // get from input stream 
+			String s = get.next(); // try to scan next int
+			System.out.println("Input: " + s); // display input
+			temp = getDoubleNumber(s); // attempt to parse to int
+			result += temp; 
+		}
+		
+		System.out.println("Sum = " + result); 
+	}
 
 	// Helper method to parse to an int with a try-catch
 	public static int getIntegerNumber(String arg)
@@ -52,14 +77,23 @@ public class User_Input {
 		}catch(NumberFormatException e)
 		{
 			System.out.println("ERROR: " + e.getMessage() + " This argument must be an integer!");
+			System.out.println("Calculation will not be correct: -1 will be added");
 		}
     	        //error, return 1
-		return 1;
+		return -1;
 	}
 	
 	public static double getDoubleNumber(String arg) {
+		
+		try { 
+			return Double.parseDouble(arg); 
+		} catch ( NumberFormatException e) { 
+			System.out.println("ERROR: " + e.getMessage() + " This argument must be an number!");
+			System.out.println("Calculation will not be correct: -1 will be added");
+		}
 		
 		return -1; 
 	}
 	
 }
+
